@@ -1,4 +1,3 @@
-
 # words =["python", "ai", "engineer", "data", "analyst", "uk"]
 
 # def filterby_word_length(word: list[str], min_length:int) -> list[str]:
@@ -12,26 +11,115 @@
 # def analyse_text(text: str) -> dict:
 #     return [ w]
 
-text = "the cat sat on the mat the cat"
+# text = "the cat sat on the mat the cat"
 
 
-def analyse_text(text: str):
-    results = {}
-    text_split = text.split()
-    word_count = len(text_split)
-    results["word_count"] = word_count
-    unique_word_count= len(set(text_split))
-    results["unique_word_count"] = unique_word_count
-    most_common_word = max(text_split, key= text_split.count)
-    results["most_common_word"] = most_common_word
-    sum_length = sum(len(w) for w in text_split)
-    avg_word_length = sum_length / word_count
-    results["avg_word_length"] = avg_word_length
-    return results
+# def analyse_text(text: str) -> dict:
+#     results = {}
+#     text_split = text.split()
+#     word_count = len(text_split)
+#     results["word_count"] = word_count
+#     unique_word_count= len(set(text_split))
+#     results["unique_word_count"] = unique_word_count
+#     most_common_word = max(text_split, key= text_split.count)
+#     results["most_common_word"] = most_common_word
+#     sum_length = sum(len(w) for w in text_split)
+#     avg_word_length = sum_length / word_count
+#     results["avg_word_length"] = avg_word_length
+#     return results
 
-print(analyse_text(text))
+# print(analyse_text(text))
 
     
+# import json
+
+# def load_config(path: str, required_keys: list[str]) -> dict:
+#     with open("config.json", "r") as f:
+#         data = json.load(f)
+#     for key in required_keys:
+#         if key not in data:
+#             raise ValueError(f"Missing required key: {key}")
+#     return data
+   
 
 
 
+# print(load_config("config.json", ["model", "life"] ))
+
+
+# import time
+
+# def retry(func):
+#     def wrapper(*args, **kwargs):
+#         for _ in range(3):
+#             try:
+#                 return func(*args, **kwargs)
+#             except Exception:
+#                 print ("Failed, retrying...")
+#     return wrapper
+
+
+import random          
+    
+# @retry
+# def flaky_function():
+#     if random.random() < 0.7:
+#         raise Exception("Failed!")
+#     return "Success"
+
+# print(flaky_function())
+
+
+# def retry(max_attempts=3, delay=1.0):
+#     def decorator(func):
+#         def wrapper(*args, **kwargs):
+#             for _ in range(max_attempts):
+#                 try: 
+#                     return func(*args, **kwargs)
+#                 except Exception:
+#                    print(f"Failed, retrying in {delay}s") 
+#                    time.sleep(delay)
+#         return wrapper
+#     return decorator
+
+
+# @retry(max_attempts=3, delay=1.0)
+# def flaky_function():
+#     if random.random() < 0.7:
+#         raise Exception("Failed!")
+#     return "Success"
+
+# print(flaky_function())
+
+# flaky_function = retry(max_attempts=3, delay=1.0)(flaky_function)
+
+import  time
+import random
+import functools
+
+def retry(max_attempts=3, delay=1.0, exceptions=(Exception,)):
+    def decorator(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            last_exception = None
+            for attempt in range(1, max_attempts + 1):
+                try:
+                    return func(*args, **kwargs)
+                except exceptions as e:
+                    last_exception = e
+                    if attempt == max_attempts:
+                        raise
+                    print(f"Attempt {attempt}/{max_attempts} failed: {e}. Retrying in {delay}")
+                    time.sleep(delay)
+        return wrapper
+    return decorator
+
+
+
+@retry(max_attempts=3, delay=0.5, exceptions=(ValueError,))
+def flaky_function():
+    if random.random() < 0.7:
+        raise ValueError("API unavailable")
+    return "Success"
+
+print(flaky_function())

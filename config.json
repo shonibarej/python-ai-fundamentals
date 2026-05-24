@@ -1,0 +1,8 @@
+{
+    "model": "gpt-4o",
+    "temperature": 0.0,
+    "max_tokens": 1000,
+    "api_key": "sk-123"
+}
+
+
