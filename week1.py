@@ -24,11 +24,13 @@
 #     most_common_word = max(text_split, key= text_split.count)
 #     results["most_common_word"] = most_common_word
 #     sum_length = sum(len(w) for w in text_split)
+#     print(sum_length)
 #     avg_word_length = sum_length / word_count
 #     results["avg_word_length"] = avg_word_length
 #     return results
 
 # print(analyse_text(text))
+# print(len(text))
 
     
 # import json
@@ -93,33 +95,59 @@ import random
 
 # flaky_function = retry(max_attempts=3, delay=1.0)(flaky_function)
 
-import  time
-import random
-import functools
+# import  time
+# import random
+# import functools
 
-def retry(max_attempts=3, delay=1.0, exceptions=(Exception,)):
-    def decorator(func):
-        @functools.wraps(func)
-        def wrapper(*args, **kwargs):
-            last_exception = None
-            for attempt in range(1, max_attempts + 1):
-                try:
-                    return func(*args, **kwargs)
-                except exceptions as e:
-                    last_exception = e
-                    if attempt == max_attempts:
-                        raise
-                    print(f"Attempt {attempt}/{max_attempts} failed: {e}. Retrying in {delay}")
-                    time.sleep(delay)
-        return wrapper
-    return decorator
+# def retry(max_attempts=3, delay=1.0, exceptions=(Exception,)):
+#     def decorator(func):
+#         @functools.wraps(func)
+#         def wrapper(*args, **kwargs):
+#             last_exception = None
+#             for attempt in range(1, max_attempts + 1):
+#                 try:
+#                     return func(*args, **kwargs)
+#                 except exceptions as e:
+#                     last_exception = e
+#                     if attempt == max_attempts:
+#                         raise
+#                     print(f"Attempt {attempt}/{max_attempts} failed: {e}. Retrying in {delay}")
+#                     time.sleep(delay)
+#         return wrapper
+#     return decorator
 
 
 
-@retry(max_attempts=3, delay=0.5, exceptions=(ValueError,))
-def flaky_function():
-    if random.random() < 0.7:
-        raise ValueError("API unavailable")
-    return "Success"
+# @retry(max_attempts=3, delay=0.5, exceptions=(ValueError,))
+# def flaky_function():
+#     if random.random() < 0.7:
+#         raise ValueError("API unavailable")
+#     return "Success"
 
-print(flaky_function())
+# print(flaky_function())
+
+
+# Good. Day 2 — OOP and classes.
+
+# class Dog:
+#     def __init__(self, name: str, breed: str):
+#         self.name = name
+#         self.breed = breed
+
+#     def bark(self):
+#         print(f"{self.name} says woof!")
+
+#     def describe(self):
+#         print(f"{self.name} is a {self.breed}")
+
+
+# dog1 = Dog("Rex", "Labrador")
+# dog2 = Dog("Buddle", "Poodle")
+
+# dog1.bark()
+# dog2.bark()
+# dog1.describe()
+# dog2.describe()
+
+
+
