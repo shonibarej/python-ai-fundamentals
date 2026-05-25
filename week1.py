@@ -151,3 +151,31 @@ import random
 
 
 
+import json
+# 1. Write a dict to a JSON file:
+config = {
+    "model": "gpt-4o",
+    "temperature": 0.0,
+    "max_tokens": 1000,
+    "tags": ["rag", "production", "uk"]
+}
+
+
+with open("config.json", "w") as f:
+    json.dump(config, f, indent= 2)
+
+# 2. Read it back:
+with open("config.json", "r") as f:
+    loaded = json.load(f)
+    print(loaded)
+    print(type(loaded))
+
+# 3. Convert dict to string (used when sending data over APIs):
+json_string = json.dumps(config)
+print(json_string)
+print(type(json_string))
+
+# 4. Convert string back to dict:
+back_to_dict = json.loads(json_string)
+print(back_to_dict)
+print(type(back_to_dict))
