@@ -15,14 +15,18 @@ class DocumentStore:
         documentstored = len(self.document)
         return f"Documents stored {documentstored} documents"
     
-store = DocumentStore()
-store.add("Python is great for AI engineering")
-store.add("LangChain simplifies LLM development")
-store.add("Power BI is widely used in UK enterprises")
-store.add("Python is also used for data analysis")
 
-print(store)                    # tests __repr__
-print(len(store))               # tests __len__
-print(store.search("Python"))   # should return 2 documents
-print(store.search("LangChain")) # should return 1 document
-print(store.search("Java"))     # should return empty list
+class RankedDocumentStore(DocumentStore):
+    def search(self, query: str) -> list[str]:
+        result = sorted([doc for doc in self.document if query in doc.split()],
+               key=lambda doc: doc.split().count(query), reverse=True)
+        return result
+        
+    
+ranked_store = RankedDocumentStore()
+ranked_store.add("Python is great for AI engineering")
+ranked_store.add("Python and Python are used everywhere")
+ranked_store.add("LangChain simplifies LLM development")
+ranked_store.add("Python is also used for data analysis")
+
+print(ranked_store.search("Python"))

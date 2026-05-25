@@ -29,6 +29,28 @@
 
 # Good. Day 2 — OOP and classes.
 
+# word = "car"
+# statements = [
+#     "car car car red",
+#     "car fast",
+#     "bike blue",
+#     "car car fuel"
+# ]
+
+# result = sorted([s for s in statements if word in s.split()],
+#                 key= lambda s: s.split().count(word), reverse=True )
+
+# print(result)
 
 
+numbers = [5, 2, 8, 1, 9, 3]
 
+# Sort normally:
+print(sorted(numbers))
+
+# Sort by remainder when divided by 3:
+print(sorted(numbers, key=lambda x: x % 3))
+
+# Sort strings by length:
+words = ["python", "ai", "engineer", "data"]
+print(sorted(words, key=lambda w: len(w)))
