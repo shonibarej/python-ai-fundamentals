@@ -1,9 +1,9 @@
-# words =["python", "ai", "engineer", "data", "analyst", "uk"]
+words =["python", "ai", "engineer", "data", "analyst", "uk"]
 
-# def filterby_word_length(word: list[str], min_length:int) -> list[str]:
-#     return [ w for w in word if len(w) > min_length]
+def filterby_word_length(word: list[str], min_length:int) -> list[str]:
+    return [ w for w in word if len(w) > min_length]
 
-# print(filterby_word_length(words, 3))
+print(filterby_word_length(words, 3))
 
 
 
@@ -11,37 +11,37 @@
 # def analyse_text(text: str) -> dict:
 #     return [ w]
 
-# text = "the cat sat on the mat the cat"
+text = "the cat sat on the mat the cat"
 
 
-# def analyse_text(text: str) -> dict:
-#     results = {}
-#     text_split = text.split()
-#     word_count = len(text_split)
-#     results["word_count"] = word_count
-#     unique_word_count= len(set(text_split))
-#     results["unique_word_count"] = unique_word_count
-#     most_common_word = max(text_split, key= text_split.count)
-#     results["most_common_word"] = most_common_word
-#     sum_length = sum(len(w) for w in text_split)
-#     print(sum_length)
-#     avg_word_length = sum_length / word_count
-#     results["avg_word_length"] = avg_word_length
-#     return results
+def analyse_text(text: str) -> dict:
+    results = {}
+    text_split = text.split()
+    word_count = len(text_split)
+    results["word_count"] = word_count
+    unique_word_count= len(set(text_split))
+    results["unique_word_count"] = unique_word_count
+    most_common_word = max(text_split, key= text_split.count)
+    results["most_common_word"] = most_common_word
+    sum_length = sum(len(w) for w in text_split)
+    print(sum_length)
+    avg_word_length = sum_length / word_count
+    results["avg_word_length"] = avg_word_length
+    return results
 
-# print(analyse_text(text))
-# print(len(text))
+print(analyse_text(text))
+print(len(text))
 
     
-# import json
+import json
 
-# def load_config(path: str, required_keys: list[str]) -> dict:
-#     with open("config.json", "r") as f:
-#         data = json.load(f)
-#     for key in required_keys:
-#         if key not in data:
-#             raise ValueError(f"Missing required key: {key}")
-#     return data
+def load_config(path: str, required_keys: list[str]) -> dict:
+    with open("config.json", "r") as f:
+        data = json.load(f)
+    for key in required_keys:
+        if key not in data:
+            raise ValueError(f"Missing required key: {key}")
+    return data
    
 
 
@@ -179,3 +179,8 @@ print(type(json_string))
 back_to_dict = json.loads(json_string)
 print(back_to_dict)
 print(type(back_to_dict))
+
+if __name__ == "__main__":
+    text = "the cat sat on the mat the cat"
+    print(analyse_text(text))
+    print(load_config("config.json", ["model", "temperature"]))

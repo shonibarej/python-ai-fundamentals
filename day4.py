@@ -59,13 +59,3 @@ from datetime import datetime
 # print(doc2.tags)
 
 
-@dataclass
-class BadDocument:
-    tags: list = []  # WRONG
-
-doc1 = BadDocument()
-doc2 = BadDocument()
-
-doc1.tags.append("python")
-print(doc1.tags)  # ['python']
-print(doc2.tags)  # ['python'] ← WRONG, doc2 shouldn't have this
