@@ -17,7 +17,55 @@ import csv
 #     for row in reader:
 #         print(row)
 
-with open("employees.csv", "r") as f:
-    reader = csv.DictReader(f)
-    analysts = [row for row in reader if row["role"] == "Data Analyst"]
-    print(analysts)
+# with open("employees.csv", "r") as f:
+#     reader = csv.DictReader(f)
+#     analysts = [row for row in reader if row["role"] == "Data Analyst"]
+#     print(analysts)
+
+# class Document:
+#     def __init__(self, id: str, content: str, source: str):
+#         self.id = id
+#         self.content = content
+#         self.source = source
+
+
+# from dataclasses import dataclass
+
+# @dataclass
+# class Documnent:
+#     id: str
+#     content: str
+#     source: str
+
+
+from dataclasses import dataclass, field
+from datetime import datetime
+
+# @dataclass
+# class Document:
+#     id: str
+#     content: str
+#     source: str
+#     created_at: datetime = field(default_factory=datetime.utcnow)
+#     tags: list = field(default_factory=list)
+
+
+# doc1 = Document(id="1", content="Python is great for AI", source="manual")
+# doc2 = Document(id="2", content="LangChain Simplifies LLMs", source="web", tags=["ai", "langchain"])
+
+# print(doc1)
+# print(doc2)
+# print(doc1.content)
+# print(doc2.tags)
+
+
+@dataclass
+class BadDocument:
+    tags: list = []  # WRONG
+
+doc1 = BadDocument()
+doc2 = BadDocument()
+
+doc1.tags.append("python")
+print(doc1.tags)  # ['python']
+print(doc2.tags)  # ['python'] ← WRONG, doc2 shouldn't have this
